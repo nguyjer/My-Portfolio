@@ -42,7 +42,7 @@ export default function index() {
             <div className={styles.introContainer}>
                 <div ref={introImage} data-scroll data-scroll-speed="0.3" className={styles.introImage}>
                     <Image
-                        src={'/images/flowers.jpg'}
+                        src={'/images/me.jpg'}
                         fill={true}
                         alt={'background image'}
                     />
