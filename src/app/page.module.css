@@ -1,0 +1,10 @@
+.progressContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10vh;
+    color: black;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    align-items: center;
+    justify-content: center;
+}
