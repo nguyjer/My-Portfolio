@@ -1,6 +1,6 @@
 .header {
   position: absolute;
-  top: 2vh;
+  top: 32px;
   left: 0;
   width: 100%;
   background: transparent;
@@ -16,6 +16,12 @@
   width: 100%;
 }
 
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .logo {
   background: none;
   border: none;
@@ -29,6 +35,29 @@
 
 .logo:hover {
   opacity: 0.8;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.iconLink {
+  color: #666;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.iconLink:hover {
+  color: rgb(210, 232, 159);
+  transform: scale(1.2);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
 }
 
 .navButtons {

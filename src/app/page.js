@@ -20,8 +20,8 @@ export default function Home() {
     <main className={styles.main}>
       <Intro />
       <Description />
-      <Projects />
-      <div className={styles.progressContainer}>
+      {/* <Projects /> */}
+      <div id='projects' className={styles.progressContainer}>
         <h2>Site Work in Progress...</h2>
       </div>
     </main>
