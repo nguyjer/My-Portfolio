@@ -31,7 +31,7 @@ export default function index() {
         return () => ctx.revert()
     }, [])
     return (
-        <div className={styles.intro}>
+        <div id='intro' className={styles.intro}>
             <div ref={backgroundImage} className={styles.backgroundImage}>
                 <Image
                     src={'/images/intro.jpg'}

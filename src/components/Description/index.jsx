@@ -14,7 +14,7 @@ export default function index() {
     const phrases = ["hello", "my name is jeremy", "i am a software engineer", "My goal is to leverage technology", "to create innovative solutions", "that address pressing environmental challenges.",
     ]
     return (
-        <div className={styles.description}>
+        <div id="about" className={styles.description}>
             {
                 phrases.map((phrase, index) => {
                     return <AnimatedText key={index}>{phrase}</AnimatedText>

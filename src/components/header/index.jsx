@@ -1,37 +1,26 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import styles from './style.module.css';
 
-export default function index() {
-  const [direction, setDirection] = useState('');           // '', 'scroll-up', or 'scroll-down'
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.pageYOffset;
-      
-      if (currentScrollY <= 0) {
-        setDirection('');
-      } 
-      else if (currentScrollY > lastScrollY.current) {
-        setDirection('scroll-down');
-      } 
-      else if (currentScrollY < lastScrollY.current) {
-        setDirection('scroll-up');
-      }
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+export default function Header() {
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <div className={direction}>
-      <header className={styles.header}>
-        <h1>Your beautiful goes here!</h1>
-      </header>
-    </div>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <button className={styles.logo} onClick={() => scrollToSection('intro')}>Jeremy Nguyen</button>
+        <div className={styles.navButtons}>
+          <button className={styles.navButton} onClick={() => scrollToSection('about')}>About</button>
+          <button className={styles.navButton} onClick={() => scrollToSection('projects')}>Projects</button>
+          <button className={styles.navButton}>Experience</button>
+        </div>
+      </nav>
+    </header>
   );
 }

@@ -23,7 +23,7 @@ export default function index() {
         }
     ]
     return (
-        <div className={styles.projects}>
+        <div id="projects" className={styles.projects}>
             <div className={styles.projectDescription}>
                 <div className={styles.imageContainer}>
                     <Image
