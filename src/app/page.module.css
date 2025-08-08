@@ -8,3 +8,28 @@
     align-items: center;
     justify-content: center;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .progressContainer {
+        margin-top: 5vh;
+        padding: 3rem 1rem;
+    }
+    
+    .progressContainer h2 {
+        font-size: 1.5rem;
+        text-align: center;
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 480px) {
+    .progressContainer {
+        padding: 2rem 0.5rem;
+    }
+    
+    .progressContainer h2 {
+        font-size: 1.25rem;
+        padding: 0 1rem;
+    }
+}

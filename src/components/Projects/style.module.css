@@ -1,36 +1,114 @@
 .projects {
     display: flex;
-    flex-direction: column;
-    margin-top: 25vh;
-    color: black;
-    padding: 10%;
-} 
+    gap: 4rem;              /* Reduced from 15rem */
+    padding: 10rem 2rem;     /* Reduced from 15rem */
+    max-width: 1400px;      /* Increased for larger image */
+    margin: 4rem auto;
+    justify-content: center;
+    align-items: center;
+}
 
-.projectDescription {
+.sidebar {
     display: flex;
-    height: 700px;
-    gap: 5%;
-    width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: flex-start;  /* Changed from flex-start to flex-end for right alignment */
+    justify-content: center;
+    height: 450px;          /* Match image height for vertical centering */
+}
+
+.projectButton {
+    background: none;
+    border: none;
+    color: rgb(157, 174, 117);
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: border-bottom 0.2s, color 0.2s;
+    text-align: right;
+    letter-spacing: 1px;
+}
+
+.projectButton:hover,
+.projectButton.active {
+    color: #145022;
+    border-bottom: 2px solid #145022;
+}
+
+.projectContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 2rem;
 }
 
 .imageContainer {
     position: relative;
-    height: 73%;
-    width: 120%;
+    width: 800px;
+    height: 450px;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(26,60,43,0.10);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.imageContainer img {
+.projectImage {
     object-fit: cover;
 }
 
-.column {
-    width: 20%;
-    display: flex;
-    font-size: 1.5vw;
+.description {
+    background: none;
+    padding: 2rem 0 0 0;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: none;
 }
 
-.column:last-of-type{
-    font-size: 1vw;
-    align-items: flex-end;
+.description h2 {
+    color: rgb(0, 0, 0);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.description p {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: rgb(157, 174, 117);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .projects {
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 1rem;
+        gap: 2rem;
+    }
+    .sidebar {
+        flex-direction: row;
+        gap: 1.2rem;
+        margin-bottom: 2rem;
+        align-items: center;
+    }
+    .projectButton {
+        font-size: 1.1rem;
+    }
+    .imageContainer {
+        width: 90vw;
+        max-width: 420px;
+        height: 180px;
+    }
+    .description {
+        max-width: 90vw;
+        padding: 1rem 0 0 0;
+    }
 }
