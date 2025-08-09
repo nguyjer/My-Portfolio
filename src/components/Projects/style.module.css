@@ -7,18 +7,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    animation: fadeInUp 0.8s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .sidebar {
@@ -51,11 +39,12 @@
     font-weight: 600;
     cursor: pointer;
     padding: 0.5rem 1rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.2s ease, transform 0.2s ease;
     text-align: right;
     letter-spacing: 1px;
     position: relative;
     opacity: 0.7;
+    will-change: transform;
 }
 
 .projectButton::after {
@@ -66,12 +55,13 @@
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, rgb(210, 232, 159));
-    transition: width 0.4s ease;
+    transition: width 0.2s ease;
+    will-change: width;
 }
 
 .projectButton:hover {
     color: rgb(210, 232, 159);
-    transform: translateX(-5px);
+    transform: translateX(-2px);
     opacity: 1;
 }
 
@@ -82,7 +72,7 @@
 .projectButton.active {
     color: #145022;
     opacity: 1;
-    transform: translateX(-10px);
+    transform: translateX(-3px);
     font-weight: 700;
 }
 
@@ -111,45 +101,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: slideIn 0.6s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    transition: transform 0.2s ease-out;
+    will-change: transform;
 }
 
 .imageContainer:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 70px rgba(157, 174, 117, 0.2);
-}
-
-.imageContainer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(210, 232, 159, 0.05) 100%);
-    pointer-events: none;
-    z-index: 1;
+    transform: translateY(-2px);
 }
 
 .projectImage {
     object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.imageContainer:hover .projectImage {
-    transform: scale(1.05);
+    transition: none;
 }
 
 .description {
@@ -159,16 +121,6 @@
     max-width: 600px;
     text-align: center;
     box-shadow: none;
-    animation: fadeIn 0.8s ease-out 0.2s backwards;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 .description h2 {
