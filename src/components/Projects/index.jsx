@@ -1,101 +1,89 @@
-// import styles from "./style.module.css";
-// import { useState } from "react";
-// import Image from "next/image";
-
-// export default function index() { 
-
-//     const [selectedProject, setSelectedProject] = useState(0);
-//     const projects = [
-//         {
-//             title: "PalestineWatch", src: "PalestineWatch.png", description: "A web application that provides resources and information about the Palestinian cause.",
-//         },
-//         {
-//             title: "JoinMe App", src: "JoinMeApp.png", description: "A mobile app that connects friends for social activities and events.",
-//         },
-//         {
-//             title: "Catify", src: "Catify.png", description: "A fun web app that generates hand-drawn cat images based on user's spotify data"
-//         },
-//         {
-//             title: "Portfolio Website", src: "PortfolioWebsite.png", description: "A personal creative portfolio website to showcase my projects and skills."
-//         },
-//         {
-//             title: "Kernel Development with AC97 Audio Integration", src: "KernelDevelopment.png", description: "Implemented AC97 audio driver in a custom OS kernel, enabling sound playback and recording capabilities."
-//         }
-//     ]
-//     return (
-//         <div id="projects" className={styles.projects}>
-//             <div className={styles.projectDescription}>
-//                 <div className={styles.imageContainer}>
-//                     <Image
-//                         src={`/images/${projects[selectedProject].src}`}
-//                         fill={true} 
-//                         alt="project image"
-//                     />
-//                 </div>
-//                 <div className={styles.column}>
-//                     <p>{projects[0].description}</p>
-//                 </div>
-//                 <div className={styles.column}>
-//                     <p>A full stack web application built with next.js, bootstrap, flask, postgresql, sqlalchemy, and docker.
-//                         Implemented proper CI/CD pipelines using github actions and docker hub to ensure smooth deployment and updates.
-//                         Developed a robust backend using flask and postgresql to handle data storage and retrieval efficiently.
-//                     </p>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
+'use client';
 
 import styles from "./style.module.css";
-import { useState } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import Image from "next/image";
+import { projectsData } from "../../data/projects";
+import { useImagePreloader, preloadProjectImages } from "../../hooks/useImagePreloader";
+
+function ProjectButton({ project, index, isActive, onClick }) {
+    const handleClick = useCallback(() => {
+        onClick(index);
+    }, [index, onClick]);
+    
+    return (
+        <button
+            key={project.id}
+            className={`${styles.projectButton} ${isActive ? styles.active : ""}`}
+            onClick={handleClick}
+            aria-label={`View ${project.title} project`}
+        >
+            {project.title}
+        </button>
+    );
+}
+
+function ProjectImage({ project, priority = false }) {
+    return (
+        <div className={styles.imageContainer}>
+            <Image
+                src={`/images/${project.src}`}
+                alt={`${project.title} project screenshot`}
+                fill
+                sizes="(max-width: 768px) 95vw, (max-width: 900px) 90vw, 800px"
+                className={styles.projectImage}
+                priority={priority}
+                quality={85}
+            />
+        </div>
+    );
+}
+
+function ProjectDescription({ project }) {
+    return (
+        <div className={styles.description}>
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+        </div>
+    );
+}
 
 export default function Projects() { 
     const [selectedProject, setSelectedProject] = useState(0);
-    const projects = [
-        {
-            title: "PalestineWatch", src: "PalestineWatch.png", description: "A web application that provides resources and information about the Palestinian cause.",
-        },
-        {
-            title: "JoinMe App", src: "JoinMeApp.png", description: "A mobile app that connects friends for social activities and events.",
-        },
-        {
-            title: "Catify", src: "Catify.png", description: "A fun web app that generates hand-drawn cat images based on user's spotify data"
-        },
-        {
-            title: "Portfolio Website", src: "portfolio.png", description: "A personal creative portfolio website to showcase my projects and skills."
-        },
-        {
-            title: "Kernel w/ AC97 Audio Driver", src: "KernelDevelopment.png", description: "Implemented AC97 audio driver in a custom OS kernel, enabling sound playback and recording capabilities."
-        }
-    ];
+    
+    const handleProjectSelect = useCallback((index) => {
+        setSelectedProject(index);
+    }, []);
+    
+    const currentProject = useMemo(() => {
+        return projectsData[selectedProject];
+    }, [selectedProject]);
+    
+    const imageSources = useMemo(() => {
+        return preloadProjectImages(projectsData);
+    }, []);
+    
+    useImagePreloader(imageSources);
     return (
-        <div id="projects" className={styles.projects}>
-            <div className={styles.sidebar}>
-                {projects.map((project, idx) => (
-                    <button
-                        key={project.title}
-                        className={`${styles.projectButton} ${selectedProject === idx ? styles.active : ""}`}
-                        onClick={() => setSelectedProject(idx)}
-                    >
-                        {project.title}
-                    </button>
-                ))}
-            </div>
-            <div className={styles.projectContent}>
-                <div className={styles.imageContainer}>
-                    <Image
-                        src={`/images/${projects[selectedProject].src}`}
-                        fill={true}
-                        alt="project image"
-                        className={styles.projectImage}
+        <section id="projects" className={styles.projects} aria-label="Projects showcase">
+            <nav className={styles.sidebar} aria-label="Project navigation">
+                {projectsData.map((project, idx) => (
+                    <ProjectButton
+                        key={project.id}
+                        project={project}
+                        index={idx}
+                        isActive={selectedProject === idx}
+                        onClick={handleProjectSelect}
                     />
-                </div>
-                <div className={styles.description}>
-                    <h2>{projects[selectedProject].title}</h2>
-                    <p>{projects[selectedProject].description}</p>
-                </div>
+                ))}
+            </nav>
+            <div className={styles.projectContent} role="main" aria-live="polite">
+                <ProjectImage 
+                    project={currentProject} 
+                    priority={selectedProject === 0}
+                />
+                <ProjectDescription project={currentProject} />
             </div>
-        </div>
+        </section>
     );
 }
