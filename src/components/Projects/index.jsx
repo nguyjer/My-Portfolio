@@ -1,89 +1,53 @@
-'use client';
-
 import styles from "./style.module.css";
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { projectsData } from "../../data/projects";
-import { useImagePreloader, preloadProjectImages } from "../../hooks/useImagePreloader";
-
-function ProjectButton({ project, index, isActive, onClick }) {
-    const handleClick = useCallback(() => {
-        onClick(index);
-    }, [index, onClick]);
-    
-    return (
-        <button
-            key={project.id}
-            className={`${styles.projectButton} ${isActive ? styles.active : ""}`}
-            onClick={handleClick}
-            aria-label={`View ${project.title} project`}
-        >
-            {project.title}
-        </button>
-    );
-}
-
-function ProjectImage({ project, priority = false }) {
-    return (
-        <div className={styles.imageContainer}>
-            <Image
-                src={`/images/${project.src}`}
-                alt={`${project.title} project screenshot`}
-                fill
-                sizes="(max-width: 768px) 95vw, (max-width: 900px) 90vw, 800px"
-                className={styles.projectImage}
-                priority={priority}
-                quality={85}
-            />
-        </div>
-    );
-}
-
-function ProjectDescription({ project }) {
-    return (
-        <div className={styles.description}>
-            <h2>{project.title}</h2>
-            <p>{project.description}</p>
-        </div>
-    );
-}
 
 export default function Projects() { 
     const [selectedProject, setSelectedProject] = useState(0);
-    
-    const handleProjectSelect = useCallback((index) => {
-        setSelectedProject(index);
-    }, []);
-    
-    const currentProject = useMemo(() => {
-        return projectsData[selectedProject];
-    }, [selectedProject]);
-    
-    const imageSources = useMemo(() => {
-        return preloadProjectImages(projectsData);
-    }, []);
-    
-    useImagePreloader(imageSources);
+    const projects = [
+        {
+            title: "PalestineWatch", src: "PalestineWatch.png", description: "A web application that provides resources and information about the Palestinian cause.",
+        },
+        {
+            title: "JoinMe App", src: "JoinMeApp.png", description: "A mobile app that connects friends for social activities and events.",
+        },
+        {
+            title: "Catify", src: "Catify.png", description: "A fun web app that generates hand-drawn cat images based on user's spotify data"
+        },
+        {
+            title: "Portfolio Website", src: "portfolio.png", description: "A personal creative portfolio website to showcase my projects and skills."
+        },
+        {
+            title: "Kernel w/ AC97 Audio Driver", src: "KernelDevelopment.png", description: "Implemented AC97 audio driver in a custom OS kernel, enabling sound playback and recording capabilities."
+        }
+    ];
     return (
-        <section id="projects" className={styles.projects} aria-label="Projects showcase">
-            <nav className={styles.sidebar} aria-label="Project navigation">
-                {projectsData.map((project, idx) => (
-                    <ProjectButton
-                        key={project.id}
-                        project={project}
-                        index={idx}
-                        isActive={selectedProject === idx}
-                        onClick={handleProjectSelect}
-                    />
+        <div id="projects" className={styles.projects}>
+            <div className={styles.sidebar}>
+                {projects.map((project, idx) => (
+                    <button
+                        key={project.title}
+                        className={`${styles.projectButton} ${selectedProject === idx ? styles.active : ""}`}
+                        onClick={() => setSelectedProject(idx)}
+                    >
+                        {project.title}
+                    </button>
                 ))}
-            </nav>
-            <div className={styles.projectContent} role="main" aria-live="polite">
-                <ProjectImage 
-                    project={currentProject} 
-                    priority={selectedProject === 0}
-                />
-                <ProjectDescription project={currentProject} />
             </div>
-        </section>
+            <div className={styles.projectContent}>
+                <div className={styles.imageContainer}>
+                    <Image
+                        src={`/images/${projects[selectedProject].src}`}
+                        fill={true}
+                        alt="project image"
+                        className={styles.projectImage}
+                    />
+                </div>
+                <div className={styles.description}>
+                    <h2>{projects[selectedProject].title}</h2>
+                    <p>{projects[selectedProject].description}</p>
+                </div>
+            </div>
+        </div>
     );
 }

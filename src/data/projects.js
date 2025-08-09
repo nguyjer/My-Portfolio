@@ -4,7 +4,7 @@ export const projectsData = [
         title: "PalestineWatch", 
         src: "PalestineWatch.png", 
         description: "A web application that provides resources and information about the Palestinian cause.",
-        technologies: ["Next.js", "React", "Node.js"],
+        technologies: ["Next.js", "PostgreSQL", "Python", "AWS", "Flask"],
         category: "Web Application"
     },
     {
@@ -12,7 +12,7 @@ export const projectsData = [
         title: "JoinMe App", 
         src: "JoinMeApp.png", 
         description: "A mobile app that connects friends for social activities and events.",
-        technologies: ["React Native", "Firebase", "JavaScript"],
+        technologies: ["Swift", "Firebase", "XCode"],
         category: "Mobile Application"
     },
     {
@@ -20,7 +20,7 @@ export const projectsData = [
         title: "Catify", 
         src: "Catify.png", 
         description: "A fun web app that generates hand-drawn cat images based on user's spotify data",
-        technologies: ["React", "Spotify API", "Canvas API"],
+        technologies: ["Node.js", "Spotify API"],
         category: "Web Application"
     },
     {
@@ -28,7 +28,7 @@ export const projectsData = [
         title: "Portfolio Website", 
         src: "portfolio.png", 
         description: "A personal creative portfolio website to showcase my projects and skills.",
-        technologies: ["Next.js", "React", "CSS Modules"],
+        technologies: ["Next.js"],
         category: "Web Application"
     },
     {

@@ -1,3 +1,9 @@
+:root {
+  --primary-green: rgb(157, 174, 117);
+  --secondary-green: rgb(210, 232, 159);
+  --dark-green: rgb(100, 120, 70);
+}
+
 body {
   margin: 0px;
   background-color: white;

@@ -194,8 +194,17 @@
     display: flex;
   }
 
+  .hamburgerLine {
+    background-color: rgb(157, 174, 117);
+  }
+
   .mobileMenu {
     display: flex;
+  }
+  
+  .mobileNavButton {
+    color: rgb(157, 174, 117);
+    font-weight: 600;
   }
 }
 

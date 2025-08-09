@@ -62,67 +62,118 @@
     }
     
     .introContainer {
-        margin-top: 25vh;
+        margin-top: 30vh;
         flex-direction: column;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
+        gap: 1rem;
+    }
+    
+    .introText {
+        order: 2;
     }
     
     .introContainer h1 {
-        font-size: 12vw;
+        font-size: clamp(2.5rem, 12vw, 4rem);
         margin-bottom: 1rem;
         text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        letter-spacing: 2px;
     }
     
     .introContainer h3 {
-        font-size: 4vw;
+        font-size: clamp(1rem, 4vw, 1.5rem);
         margin-top: 1rem;
         width: 100%;
         padding: 0 1rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        line-height: 1.4;
     }
     
     .introImage {
-        width: 250px;
-        height: 350px;
+        width: 280px;
+        height: 380px;
         position: relative;
         margin-bottom: 2rem;
+        order: 1;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .introImage img {
+        transition: transform 0.3s ease;
     }
 }
 
 @media (max-width: 480px) {
+    .introContainer {
+        margin-top: 25vh;
+        padding: 0 1rem;
+        gap: 1.5rem;
+    }
+    
+    .introContainer h1 {
+        font-size: clamp(2rem, 15vw, 3rem);
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+    }
+    
+    .introContainer h3 {
+        font-size: clamp(0.9rem, 5vw, 1.2rem);
+        line-height: 1.5;
+        margin-top: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .introImage {
+        width: 220px;
+        height: 300px;
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 390px) {
+    .introContainer {
+        margin-top: 22vh;
+        padding: 0 0.75rem;
+    }
+    
+    .introContainer h1 {
+        font-size: clamp(1.8rem, 16vw, 2.5rem);
+        letter-spacing: 0.5px;
+    }
+    
+    .introContainer h3 {
+        font-size: clamp(0.85rem, 5.5vw, 1.1rem);
+        padding: 0;
+    }
+    
+    .introImage {
+        width: 200px;
+        height: 270px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 320px) {
     .introContainer {
         margin-top: 20vh;
         padding: 0 0.5rem;
     }
     
     .introContainer h1 {
-        font-size: 15vw;
-        margin-bottom: 1.5rem;
+        font-size: clamp(1.6rem, 18vw, 2.2rem);
     }
     
     .introContainer h3 {
-        font-size: 5vw;
-        line-height: 1.4;
-        margin-top: 1.5rem;
-    }
-    
-    .introImage {
-        width: 200px;
-        height: 280px;
-        margin-bottom: 1.5rem;
-    }
-}
-
-@media (max-width: 320px) {
-    .introContainer h1 {
-        font-size: 18vw;
-    }
-    
-    .introContainer h3 {
-        font-size: 6vw;
+        font-size: clamp(0.8rem, 6vw, 1rem);
+        line-height: 1.6;
     }
     
     .introImage {
         width: 180px;
         height: 240px;
+        border-radius: 8px;
     }
 }
